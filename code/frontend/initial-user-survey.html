@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Required Meta Tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <!--Javascripts: Jquery & BootstrapJS-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>NutriAid</title>
+    <style>
+     
+
+   
+   
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 20px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-width: 1px;
+  border-color:  #7F152E;
+  background: #A10115 ;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 20px;
+  height: 20px;
+  border-width: 1px;
+  border-color:  #7F152E;
+  background: #A10115 ;
+  cursor: pointer;
+}
+label{
+    color:#A10115;
+    font-weight:bold;
+}
+.navbar a.active {
+  border-top: solid 3px;
+  border-bottom: solid 3px;
+  border-color:#A10115;
+  
+  color:white;
+ 
+}
+.nav-item{
+    padding:8px 15px;
+}
+
+.navbar a:hover {
+    border-top: solid 3px;
+  border-bottom: solid 3px;
+  border-color: #F0EFEA ;
+
+  color:white;
+}
+body{
+    background-color:white;
+}
+    </style>
+    <script type="text/javascript">
+       
+    </script>
+</head>
+
+<body>
+    
+    <div >
+        
+        <nav class="navbar navbar-light m-2" style="background-color:#138d75  ;" >
+            <span class="navbar-brand mb-0 h1" style="color:white; font-weight: bold; font-size:20px" >NutriAid</span>
+            <div class="nav nav-pills mb-0 float-right" id="nav-tab" role="tablist" style="font-weight: 600; color:white">
+                <a class="active nav-item text-white" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+                <a class="nav-item text-white" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">About</a>
+                <a class="nav-item text-white" id="nav-report-tab" data-toggle="tab" href="#nav-search" role="tab" aria-controls="nav-search" aria-selected="false">Search</a>
+            </div>
+        </nav>
+        <div class="container  h-80 w-70 m-auto p-2" style=" background-color:#F0EFEA; border:solid; border-color: #7F152E; margin-top: 25px; border-radius: 20px;  ">
+
+           <div  style="font-size:16px; font-weight:bold ;color: #A10115"> 
+               <center>Diet Restrictions</center>
+            </div>
+            <div style="color:#A10115"> 
+                   <center>Tell us more about your preferences!</center>
+            </div>
+         
+            
+            <div >
+                <form  id="surveyForm" action="home.html"> 
+                    <div class ="row" style="margin-top: 20px;">
+                            <div class="col-md-2 form-group" ></div>
+                            <div class="col-md-4 form-group" >                
+                                    <center>   <label for="carbohydratesRange">Carbohydrates</label>   <img src= "carbohydrates.png" style="width: 25px"></img></center>
+                             
+                                        </div>
+                            <div class="col-md-4 form-group" >    
+                                <input type="range" min="1" max="100" value="50" class="slider" id="carbohydratesRange">
+                            </div> 
+                            <div class="col-md-2 form-group" ></div>
+                    </div> 
+                    <div class ="row"  >  
+                        <div class="col-md-2 form-group" ></div>  
+                        <div class="col-md-4 form-group" >                 
+                            <center><label for="proteinRange">Protein</label>    <img src= "protein.png" style="width: 25px"></img></center>
+                        </div>
+                        <div class="col-md-4 form-group">    
+                            <input type="range" min="1" max="100" value="50" class="slider" id="proteinRange">
+                        </div> 
+                        <div class="col-md-2 form-group"></div>
+                    </div> 
+                    <div class ="row"> 
+                       <div class="col-md-2 form-group"></div>  
+                       <div class="col-md-4 form-group">         
+                        <center>  <label for="fatRange">Fat</label>       <img src= "fat.png" style="width: 25px"></img></center>  
+                       </div>
+                       <div class="col-md-4 form-group"> 
+                            <input type="range" min="1" max="100" value="50" class="slider" id="fatRange">
+                       </div>
+                       <div class="col-md-2 form-group"></div>
+                    </div> 
+                    <div class ="row"> 
+                        <div class="col-md-2 form-group"></div>  
+                        <div class="col-md-4 form-group"> 
+                           <center><label for="caloriesRange">Calories</label>       <img src= "calories.png" style="width: 25px"></img></center> 
+                        </div>
+                        <div class="col-md-4 form-group"> 
+                            <input type="range" min="1" max="100" value="50" class="slider" id="caloriesRange">
+                        </div>
+                        <div class="col-md-2 form-group"></div>
+                    </div> 
+                    <div class ="row"> 
+                        <div class="col-md-2 form-group"></div>  
+                        <div class="col-md-4 form-group"> 
+                                <center> <label for="sugarRange">Sugar</label>     <img src= "sugar.png" style="width: 25px"></img></center>
+                        </div>
+                        <div class="col-md-4 form-group"> 
+                            <input type="range" min="1" max="100" value="50" class="slider" id="sugarRange">
+                        </div>
+                        <div class="col-md-2 form-group"></div>
+                    </div> 
+                    <div class ="row"> 
+                            <div class="col-md-4 form-group"></div>
+                        <div class="col-md-2 form-group">
+                          
+                            <button type="submit" id="submitbutton" class="btn" style="background-color: #138d75  ;color:white ; border-color:#A10115">Confirm</button>
+                           
+                        </div>
+                        <div class="col-md-2 form-group ">
+                           
+                            <button type="reset" class="btn" style="background-color:#138d75  ; color: white ;border-color:#A10115">Cancel</button>
+                      
+                        </div>
+                </div>
+                </form>
+            </div>
+        </div>
+      </div>
+      <div style="font-size: 10px" ><center>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></center></div>
+      <div style="font-size: 10px"><center>Icons made by <a href="https://www.flaticon.com/authors/becris" title="Becris">Becris</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></center></div>
+      <div style="font-size: 10px"><center>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></center></div>
+      
+</body>
+
+</html>

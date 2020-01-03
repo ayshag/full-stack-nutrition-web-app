@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Required Meta Tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <!--Javascripts: Jquery & BootstrapJS-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>NutriAid</title>
+    <style>
+       .vertical-separator{
+           width: 2px;
+           background-color: hsl(184, 100%, 60%);
+           height: inherit;
+           margin-left: 10px;
+           margin-right: 10px;
+       }
+
+   
+   
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 20px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-width: 1px;
+  border-color:  #7F152E;
+  background: #A10115 ;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 20px;
+  height: 20px;
+  border-width: 1px;
+  border-color:  #7F152E;
+  background: #A10115 ;
+  cursor: pointer;
+}
+label{
+    color:#A10115;
+    font-weight:bold;
+}
+.navbar a.active {
+  border-top: solid 3px;
+  border-bottom: solid 3px;
+  border-color:#A10115;
+  
+  color:white;
+ 
+}
+.nav-item{
+    padding:8px 15px;
+}
+
+.navbar a:hover {
+    border-top: solid 3px;
+  border-bottom: solid 3px;
+  border-color: #F0EFEA ;
+
+  color:white;
+}
+body{
+    background-color:lightgray;
+}
+    </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript">
+      function signup() 
+      {
+        const data = {
+          'name' : document.getElementById('nameInput').value,
+          'username' : document.getElementById('usernameInput').value,
+          'password' : document.getElementById('passwordInput').value
+        }
+        $.ajax({
+          url: "http://localhost:3001/signup",
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(data),
+          success: function(response){
+            const data = JSON.parse(response);
+            console.log(data.authenticated);
+            
+        }})
+        $.ajax({
+          url: "http://localhost:3001/data",
+          type: 'GET',
+          contentType: 'application/json',
+          success: function(response){
+            console.log(response);
+        }})
+      }
+    </script>
+</head>
+
+<body>
+    <center><span class="navbar-brand mb-0 h1" style="color:#A10115; font-weight: bold; font-size:40px" >NutriAid</span></center>
+    <div >
+        
+        <div class="container  h-60 w-50 m-auto p-2" style=" background: white; border:solid; border-color: #7F152E; margin-top: 50px; border-radius: 25px ">
+
+          <form  id="surveyForm" action="javascript:signup();"> 
+            <div class ="row" style="margin-top: 20px;">
+                  <div class="col-md-2 form-group" ></div>
+                  <div class="col-md-4 form-group" >                
+                          <center>   <label for="nameInput">Name</label></center>
+                  </div>
+                  <div class="col-md-4 form-group" >    
+                      <input type="text" id="nameInput">
+                  </div> 
+                  <div class="col-md-2 form-group" ></div>
+           </div> 
+            <div class ="row" style="margin-top: 20px;">
+                    <div class="col-md-2 form-group" ></div>
+                    <div class="col-md-4 form-group" >                
+                            <center>   <label for="usernameInput">Username</label></center>
+                    </div>
+                    <div class="col-md-4 form-group" >    
+                        <input type="text" id="usernameInput">
+                    </div> 
+                    <div class="col-md-2 form-group" ></div>
+            </div> 
+            <div class ="row" style="margin-top: 20px;">
+              <div class="col-md-2 form-group" ></div>
+              <div class="col-md-4 form-group" >                
+                      <center>   <label for="passwordInput">Password</label></center>
+              </div>
+              <div class="col-md-4 form-group" >    
+                  <input type="password" id="passwordInput">
+              </div> 
+              <div class="col-md-2 form-group" ></div>
+          </div>
+          <div class ="row" style="margin-top: 20px;">
+              <div class="col-md-2 form-group" ></div>
+              <div class="col-md-4 form-group" >                
+                      <center>   <label for="confirmPasswordInput">Confirm Password</label></center>
+              </div>
+              <div class="col-md-4 form-group" >    
+                  <input type="password" id="confirmPasswordInput">
+              </div> 
+              <div class="col-md-2 form-group" ></div>
+          </div>
+          <div class = "row">
+            <div class="col-md-4 form-group"></div>
+            <div class="col-md-4 form-group" > <center> <button type="submit" id="submitbutton" class="btn" style="background-color: #138d75 ;color:white ; border-color:#A10115 ; ">Sign Up</button>
+            </div></center>
+            <div class="col-md-4 form-group"></div>
+          </div>
+        
+          <div class="row">
+            <div class="col-md-4 form-group"></div>
+            <div class="col-md-4 form-group"><a href="signin.html" ><center>Already Have an Account?</center></a></div>
+            <div class="col-md-4 form-group"></div>
+          </div>
+            </form>
+              
+            </div>
+           
+        </div>
+      </div>
+
+      
+</body>
+
+</html>

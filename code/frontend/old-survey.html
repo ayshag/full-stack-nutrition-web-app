@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Required Meta Tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <!--Javascripts: Jquery & BootstrapJS-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>NutriAid</title>
+    <style>
+       .vertical-separator{
+           width: 2px;
+           background-color: hsl(184, 100%, 60%);
+           height: inherit;
+           margin-left: 10px;
+           margin-right: 10px;
+       }
+
+       .user_profile_photo{
+           width:100px;
+           height:auto;
+       }
+    </style>
+
+</head>
+
+<body>
+    <div class="container w-80 mt-2">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                      <ul class="nav navbar-nav nav-main">
+                        <li class="active"><a href="#">HOME</a></li>
+                        <li><a href="products.html">ABOUT</a></li>
+                        <li><a href="blog.html">SEARCH</a></li>
+                    
+                        <li class="dropdown">
+                            <a href="#">
+                                PAGES
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                               <li><a  href="#">Action</a></li>
+                                <li><a  href="#">Another action</a></li>
+                                <li><a  href="#">Something else here</a></li>
+                                <li><a  href="#">Separated link</a></li>
+                            </ul>
+                        </li> <!-- End of /.dropdown -->
+    
+                        
+                    </ul> <!-- End of /.nav-main -->
+            </div>	<!-- /.container-fluid -->
+        </nav>	<!-- End of /.nav -->
+        <div class="tab-content" id="nav-tabContent">
+
+            <!--Demographics Tab-->
+            <div class="tab-pane fade show active" id="nav-demo" role="tabpanel" aria-labelledby="nav-demo-tab">
+                <div class="container">
+                    <div class="row mt-1 p-2">
+                        <div class="card card-body col-md-8 text-right border-0"> 
+    
+                            <div class="row mt-1">
+                                <label class="col-md-4 control-label font-weight-bold" for="fName">First Name:</label>
+                                <input class="col-md-8 form-control" type="text" name="fName" id="fName" required/>
+                            </div>
+                            
+                            <div class="row mt-1">
+                                <label class="col-md-4 control-label font-weight-bold" for="lName">Last Name:</label>
+                                <input class="col-md-8 form-control" type="text" name="lName" id="lName" required/>
+                            </div>                            
+        
+                            <div class="row mt-1">
+                                <label  class="col-md-4 font-weight-bold" for="gender">Gender:</label>
+                                <select class="col-md-8 form-control" id="gender" name="gender" placeholder="Choose Gender">
+                                    <option value="Male"> Male</option>
+                                    <option value="Female"> Female</option>
+                                    <option value="Other"> Other</option>
+                                </select>
+                            </div>
+
+                            <div class="row mt-1">
+                                <label class="col-md-4 control-label font-weight-bold " for="age">Age (in years):</label>
+                                <input class="col-md-8 form-control" type="number" name="age" id="age" min="1" required/>
+                            </div> 
+        
+                            <div class="row mt-1">
+                                <label  class="col-md-4 font-weight-bold" for="notes">Notes & other details:</label>
+                                <input class="col-md-8 form-control" type="text" name="notes" id="notes" required />
+                            </div>
+        
+                            <div class="row m-6">
+                                <button id="savebutton" class="btn btn-success btn-lg col-md-11 m-4" onclick="insert_table(db);">Save</button>
+                            </div>
+
+                        </div>
+                        <div class="vertical-separator">
+                            
+                        </div>
+                        <div class="card card-body col-md-3 text-center border-0 h-100">
+                            <video id="player" autoplay></video>
+                            <div id="capture" class="btn-info rounded">
+                                <i class="fas fa-2x fa-camera"></i>
+                            </div>
+                            <canvas id="canvas" width=320 height=240></canvas>
+                            <script>
+                                const player = document.getElementById('player');
+                                const canvas = document.getElementById('canvas');
+                                const context = canvas.getContext('2d');
+                                const captureButton = document.getElementById('capture');
+
+                                var has_camera_permission = false; //does not have camera permission at page_load
+
+                                const constraints = {
+                                    video: true,
+                                };
+
+                                captureButton.addEventListener('click', () => {
+                                    // Attach the video stream to the video element and autoplay.
+                                    if(!has_camera_permission){
+                                        navigator.mediaDevices.getUserMedia(constraints)
+                                            .then((stream) => {
+                                            has_camera_permission = true;
+                                            player.srcObject = stream;
+                                            });
+                                    }
+                                    // Draw the video frame to the canvas.
+                                    context.drawImage(player, 0, 0, canvas.width, canvas.height);
+
+                                    imgURL = canvas.toDataURL("image/png").replace("image/png" , "image/octet-stream");
+                                    // console.log(imgURL);
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!--Health Vitals Tab-->
+            <div class="tab-pane fade" id="nav-vitals" role="tabpanel" aria-labelledby="nav-vitals-tab">
+                    <div class="container">
+                        <div class="row mt-1 p-2">
+                            <div class="card card-body col-md-8 text-right border-0"> 
+        
+                                <div class="row mt-1">
+                                    <label class="col-md-4 control-label font-weight-bold " for="Height">Height:</label>
+                                    <input class="col-md-8 form-control" type="number" name="Height" id="Height" min="0" required/>
+                                </div>
+                                
+                                <div class="row mt-1">
+                                    <label class="col-md-4 control-label font-weight-bold" for="Weight">Weight:</label>
+                                    <input class="col-md-8 form-control" type="number" name="Weight" id="Weight" min="0" required/>
+                                </div> 
+                                
+                                <div class="row mt-1">
+                                    <label class="col-md-4 control-label font-weight-bold" for="BT">Body Temperature:</label>
+                                    <input class="col-md-8 form-control" type="number" name="BT" id="BT" min="0" required/>
+                                </div> 
+    
+                                <div class="row mt-1">
+                                    <label class="col-md-4 control-label font-weight-bold" for="PR">Pulse Rate:</label>
+                                    <input class="col-md-8 form-control" type="number" name="PR" id="PR" min="0" required/>
+                                </div> 
+            
+                                <div class="row mt-1">
+                                    <label  class="col-md-4 font-weight-bold" for="BP">BP:</label>
+                                    <input class="col-md-8 form-control" type="text" name="BP" id="BP" required />
+                                </div>
+            
+                                <div class="row m-6">
+                                    <button type="submit" id="savebutton" class="btn btn-success btn-lg col-md-11 m-4" onclick="update_table(db);">Save</button>
+                                </div>
+    
+                            </div>
+                            <div class="vertical-separator">
+                                
+                            </div>
+                            <div class="card card-body col-md-3 text-left border-0 h-100">
+                                <div class="row mt-1">
+                                    <label class="font-weight-bold" for="medications">Medications:</label>
+                                    <textarea class="col-md-12 form-control" rows="3" name="medications" id="medications" required></textarea>
+                                </div>
+                                <div class="row mt-1">
+                                    <label class="font-weight-bold" for="med_notes">Notes:</label>
+                                    <textarea class="col-md-12 form-control" rows="3" name="med_notes" id="med_notes" required></textarea>
+                                </div>                              
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            <!--Reports Tab-->
+            <div class="tab-pane fade" id="nav-report" role="tabpanel" aria-labelledby="nav-report-tab">
+                <div class="container mt-2">
+                    <table class="table table-striped table-hover table-bordered m-1 p-5" id="patient_table">
+                        <thead>
+                            <tr class="table-primary text-justify text-white font-weight-bold"><th scope="row" colspan="6">Patient Details</th></tr>
+                            <tr style="background-color:rgb(91, 140, 231) ">
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Photo</th>
+                                <th>Medications</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--Result from DB gets populated here-->
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    
+    </div>  
+    <script>
+        get_patients(db);
+    </script>  
+</body>
+
+</html>
